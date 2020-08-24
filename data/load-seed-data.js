@@ -1,6 +1,6 @@
 const client = require('../lib/client');
 // import our seed data:
-const animals = require('./animals.js');
+const weather = require('./weather.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
 
@@ -25,12 +25,34 @@ async function run() {
     const user = users[0].rows[0];
 
     await Promise.all(
-      animals.map(animal => {
+      weather.map(weather_search => {
         return client.query(`
-                    INSERT INTO animals (name, cool_factor, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO weather (
+                      location, 
+                      country_code, 
+                      right_now, 
+                      weather_description, 
+                      timezone, 
+                      temp, 
+                      sunrise, 
+                      sunset, 
+                      lat, 
+                      lon, 
+                      user_id)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
                 `,
-        [animal.name, animal.cool_factor, user.id]);
+        [
+          weather_search.location, 
+          weather_search.country_code, 
+          weather_search.current_time, 
+          weather_search.weather_description, 
+          weather_search.timezone, 
+          weather_search.temp, 
+          weather_search.sunrise, 
+          weather_search.sunset, 
+          weather_search.lat, 
+          weather_search.lon, 
+          user.id]);
       })
     );
     
