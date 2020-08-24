@@ -17,11 +17,19 @@ async function run() {
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );           
-                CREATE TABLE animals (
+                CREATE TABLE weather (
                     id SERIAL PRIMARY KEY NOT NULL,
-                    name VARCHAR(512) NOT NULL,
-                    cool_factor INTEGER NOT NULL,
-                    owner_id INTEGER NOT NULL REFERENCES users(id)
+                    location VARCHAR(512) NOT NULL,
+                    country_code VARCHAR(5) NOT NULL,
+                    right_now VARCHAR(512) NOT NULL,
+                    weather_description VARCHAR(512) NOT NULL,
+                    timezone VARCHAR(512) NOT NULL,
+                    temp INTEGER NOT NULL,
+                    sunrise VARCHAR(512) NOT NULL,
+                    sunset VARCHAR(512) NOT NULL,
+                    lat VARCHAR(512) NOT NULL,
+                    lon VARCHAR(512) NOT NULL,
+                    user_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
 
