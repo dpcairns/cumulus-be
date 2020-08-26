@@ -20,13 +20,8 @@ async function run() {
                 CREATE TABLE weather (
                     id SERIAL PRIMARY KEY NOT NULL,
                     location VARCHAR(512) NOT NULL,
+                    state_code VARCHAR(512) NOT NULL,
                     country_code VARCHAR(5) NOT NULL,
-                    right_now VARCHAR(512) NOT NULL,
-                    weather_description VARCHAR(512) NOT NULL,
-                    timezone VARCHAR(512) NOT NULL,
-                    temp INTEGER NOT NULL,
-                    sunrise VARCHAR(512) NOT NULL,
-                    sunset VARCHAR(512) NOT NULL,
                     lat VARCHAR(512) NOT NULL,
                     lon VARCHAR(512) NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id)
@@ -35,7 +30,7 @@ async function run() {
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());
   }
-  catch(err) {
+  catch (err) {
     // problem? let's see the error...
     console.log(err);
   }
