@@ -10,13 +10,27 @@ const app = require('../lib/app');
 const client = require('../lib/client');
 describe('routes', () => {
   let token;
+
   const newWeather = {
     location: '',
     state_code: '',
     country_code: '',
     lat: '',
-    lon: ''
+    lon: '',
+    id: 2,
+    user_id: 2
   };
+
+  const expectWeather = [{
+    location: '',
+    state_code: '',
+    country_code: '',
+    lat: '',
+    lon: '',
+    id: 2,
+    user_id: 2
+  }];
+
   beforeAll(async done => {
     execSync('npm run setup-db');
     client.connect();
@@ -39,28 +53,65 @@ describe('routes', () => {
       .set('Authorization', token)
       .expect('Content-Type', /json/)
       .expect(200);
-    expect(data.body).toEqual(newWeather);
+    expect(data.body).toEqual(expectWeather);
     done();
   });
-  test('returns all detail of favorite weather for the user when hitting GET /api/weather/:id', async (done) => {
-    const expected = [
-      {
-        country_code: '',
-        lat: '',
-        location: '',
-        lon: '',
-        state_code: '',
-        id: 2,
-        user_id: 2
-      },
-    ];
+
+
+  test('returns weather for the user when hitting GET /api/weather', async (done) => {
+    const expectWeather = [{
+      location: '',
+      state_code: '',
+      country_code: '',
+      lat: '',
+      lon: '',
+      id: 2,
+      user_id: 2
+    }];
     const data = await fakeRequest(app)
-      .get('/api/guitars')
+      .get('/api/weather')
       .set('Authorization', token)
       .expect('Content-Type', /json/)
       .expect(200);
-    expect(data.body).toEqual(expected);
+    expect(data.body).toEqual(expectWeather);
     done();
   });
+
+  test('returns weather for the user when hitting GET /api/weather/:id', async (done) => {
+    const expectWeather = [{
+      location: '',
+      state_code: '',
+      country_code: '',
+      lat: '',
+      lon: '',
+      id: 2,
+      user_id: 2
+    }];
+    const data = await fakeRequest(app)
+      .get('/api/weather')
+      .set('Authorization', token)
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(data.body).toEqual(expectWeather);
+    done();
+  });
+
+  test('delete a single weather item for the user when hitting DELETE /api/weather/:id', async (done) => {
+    await fakeRequest(app)
+      .delete('/api/weather/2')
+      .set('Authorization', token)
+      .expect('Content-Type', /json/)
+      .expect(200);
+    const data = await fakeRequest(app)
+      .get('/api/weather/')
+      .set('Authorization', token)
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(data.body).toEqual([]);
+    done();
+  });
+
+
+
 });
 
