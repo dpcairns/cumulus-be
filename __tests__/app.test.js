@@ -134,8 +134,5 @@ describe('routes', () => {
     expect(data.body).toEqual(expectWeather);
     done();
   });
-
-
-
 });
 
