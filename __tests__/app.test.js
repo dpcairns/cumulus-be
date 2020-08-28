@@ -111,7 +111,7 @@ describe('routes', () => {
     done();
   });
 
-  test.skip('returns weather for the user when hitting GET /api/search/', async (done) => {
+  test('returns weather for the user when hitting GET /api/search/', async (done) => {
 
     const expectWeather = {
       'location': 'Ashland',
@@ -127,7 +127,7 @@ describe('routes', () => {
       'lon': -122.70948
     };
     const data = await fakeRequest(app)
-      .get(`/api/search?key=${process.env.WEATHERBIT_API_KEY}&city=ashland&state=oregon&country=us`)
+      .get('/api/search?city=ashland&state=oregon&country=us')
       .set('Authorization', token)
       .expect('Content-Type', /json/)
       .expect(200);
