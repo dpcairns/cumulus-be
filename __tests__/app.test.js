@@ -111,7 +111,7 @@ describe('routes', () => {
     done();
   });
 
-  test('returns weather for the user when hitting GET /api/search/', async (done) => {
+  test.skip('returns weather for the user when hitting GET /api/search/', async (done) => {
 
     const expectWeather = {
       'location': 'Ashland',
