@@ -117,12 +117,12 @@ describe('routes', () => {
       'location': 'Ashland',
       'country_code': 'US',
       'state_code': 'OR',
-      'uv': 2.68429,
-      'weather_description': 'Clear sky',
+      'uv': expect.anything(),
+      'weather_description': expect.anything(),
       'timezone': 'America/Los_Angeles',
-      'temp': 24,
-      'sunrise': '13:32',
-      'sunset': '02:52',
+      'temp': expect.anything(),
+      'sunrise': expect.anything(),
+      'sunset': expect.anything(),
       'lat': 42.19458,
       'lon': -122.70948
     };
