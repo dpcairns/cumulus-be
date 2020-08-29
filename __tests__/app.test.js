@@ -127,7 +127,7 @@ describe('routes', () => {
       'lon': -122.70948
     };
     const data = await fakeRequest(app)
-      .get('/api/search?key=b0dbcac67e29478a8215f76b13d1f54e&city=ashland&state=oregon&country=us')
+      .get('/api/search?city=ashland&state=oregon&country=us')
       .set('Authorization', token)
       .expect('Content-Type', /json/)
       .expect(200);
